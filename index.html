@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Torta Pounder HQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  /* ─── RESET & VARS ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-deep:      #0f0f0f;
+    --bg-card:      #1a1a1a;
+    --bg-card-hover:#222222;
+    --accent-gold:  #e8a825;
+    --accent-red:   #c0392b;
+    --accent-cream: #f5f0e8;
+    --text-primary: #f0ece4;
+    --text-muted:   #8a8580;
+    --border:       #2e2e2e;
+    --radius:       8px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ─── TOP ANNOUNCEMENT BAR ─── */
+  .announce-bar {
+    background: var(--accent-red);
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    color: #fff;
+  }
+
+  /* ─── HEADER / NAV ─── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,15,15,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    gap: 16px;
+  }
+
+  /* Logo */
+  .logo {
+    flex-shrink: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .logo-text span { color: var(--accent-gold); }
+
+  /* Center Nav Links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+  .nav-links li { position: relative; }
+  .nav-links > li > a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    color: var(--text-primary);
+  }
+  .nav-links > li > a:hover { background: var(--bg-card); }
+  .nav-links > li > a.active { color: var(--accent-gold); }
+
+  /* Dropdown */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e1e1e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    min-width: 180px;
+    padding: 8px 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    transform: translateX(-50%) translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .nav-links li:hover .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown a {
+    display: block;
+    padding: 9px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: background 0.15s, color 0.15s;
+  }
+  .dropdown a:hover { background: #2a2a2a; color: var(--accent-gold); }
+
+  /* Right icons */
+  .nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-icon-btn {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+  }
+  .nav-icon-btn:hover { background: var(--bg-card); color: var(--accent-gold); }
+  .nav-icon-btn svg { width: 20px; height: 20px; }
+  .cart-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #111;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232,168,37,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(192,57,43,0.08) 0%, transparent 60%),
+      #111;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 720px;
+  }
+  .hero-logo-wrap {
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(232,168,37,0.18), rgba(192,57,43,0.18));
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(232,168,37,0.25);
+    overflow: hidden;
+  }
+  /* Logo image centered in the hero circle */
+  .hero-logo-wrap img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .hero h1 .gold { color: var(--accent-gold); }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    line-height: 1.5;
+  }
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 14px 36px;
+    background: var(--accent-gold);
+    color: #111;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #d4991f; transform: translateY(-1px); }
+
+  /* ─── SECTION TITLES ─── */
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3.5vw, 34px);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .section-title .gold { color: var(--accent-gold); }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .section-header { text-align: center; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+    margin: 12px auto 28px;
+    border-radius: 2px;
+  }
+
+  /* ─── COLLECTIONS STRIP ─── */
+  .collections-strip {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 36px 24px 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .collection-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 24px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .collection-pill:hover,
+  .collection-pill.active {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background: rgba(232,168,37,0.08);
+  }
+
+  /* ─── PRODUCT GRID ─── */
+  .products-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.25s, transform 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    border-color: rgba(232,168,37,0.4);
+    transform: translateY(-3px);
+  }
+  .product-img {
+    aspect-ratio: 1;
+    background: #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img .placeholder-icon {
+    width: 64px; height: 64px;
+    border-radius: 12px;
+    background: #2e2e2e;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .product-img .placeholder-icon svg { width: 32px; height: 32px; opacity: 0.35; }
+
+  /* tag badge */
+  .tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--accent-red);
+    color: #fff;
+  }
+  .tag.new { background: var(--accent-gold); color: #111; }
+
+  .product-info { padding: 14px 16px 16px; }
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .product-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--accent-gold);
+  }
+
+  /* ─── ABOUT SECTION ─── */
+  .about-section {
+    background: linear-gradient(180deg, var(--bg-deep) 0%, #151515 50%, var(--bg-deep) 100%);
+    padding: 80px 24px;
+    position: relative;
+  }
+  .about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(232,168,37,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .about-logo-wrap {
+    flex-shrink: 0;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(232,168,37,0.15), rgba(192,57,43,0.15));
+    border: 2px solid rgba(232,168,37,0.2);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-logo-wrap .placeholder-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+    color: var(--accent-cream);
+  }
+  .about-logo-wrap .placeholder-logo span { color: var(--accent-gold); display: block; }
+  .about-text { flex: 1; min-width: 280px; }
+  .about-text .section-title { text-align: left; }
+  .about-text .divider { margin-left: 0; }
+  .about-text p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .about-text p strong { color: var(--accent-gold); font-weight: 600; }
+
+  /* ─── STATS ROW ─── */
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .stat {
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    color: var(--accent-gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 24px 24px;
+    background: #0a0a0a;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-brand .logo-text { font-size: 20px; margin-bottom: 12px; }
+  .footer-brand p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 260px;
+  }
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold);
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--text-primary); }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 36px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-bottom p {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .hero { height: auto; padding: 60px 24px; }
+    .about-inner { gap: 32px; }
+  }
+  @media (max-width: 500px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announce-bar">Free shipping on all orders $55 or more in the US</div>
+
+<!-- Header -->
+<header>
+  <nav class="nav-top">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <div class="logo-icon">TP</div>
+      <div class="logo-text"><span>Torta</span> Pounder</div>
+    </a>
+
+    <!-- Center Nav -->
+    <ul class="nav-links">
+      <li>
+        <a href="#clothing">Clothing</a>
+        <div class="dropdown">
+          <a href="#">T-Shirts</a>
+          <a href="#">Hoodies</a>
+          <a href="#">Tank Tops</a>
+        </div>
+      </li>
+      <li>
+        <a href="#hats">Hats</a>
+        <div class="dropdown">
+          <a href="#">Snapbacks</a>
+          <a href="#">Dad Hats</a>
+          <a href="#">Truckers</a>
+        </div>
+      </li>
+      <li>
+        <a href="#stickers">Bumper Stickers</a>
+        <div class="dropdown">
+          <a href="#">All Stickers</a>
+          <a href="#">New Releases</a>
+          <a href="#">Best Sellers</a>
+        </div>
+      </li>
+      <li><a href="#about">About</a></li>
+    </ul>
+
+    <!-- Right Icons -->
+    <div class="nav-icons">
+      <!-- Profile -->
+      <button class="nav-icon-btn" title="Profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="8" r="4"/>
+        </svg>
+      </button>
+      <!-- Search -->
+      <button class="nav-icon-btn" title="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <!-- Cart -->
+      <button class="nav-icon-btn" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="cart-badge">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <!-- Replace the src below with the path to your actual logo image -->
+      <img src="logo.png" alt="Torta Pounder Logo" />
+    </div>
+    <h1><span class="gold">Torta</span> Pounder</h1>
+    <p>Bold, ridiculous, unapologetic gear for people who don't take themselves too seriously. Shirts, hats, bumper stickers — all dripping in flavor.</p>
+    <a href="#clothing" class="btn-primary">Shop Now</a>
+  </div>
+</section>
+
+<!-- Collection Pills -->
+<div class="collections-strip">
+  <button class="collection-pill active" onclick="filterProducts('all', this)">All</button>
+  <button class="collection-pill" onclick="filterProducts('clothing', this)">Clothing</button>
+  <button class="collection-pill" onclick="filterProducts('hats', this)">Hats</button>
+  <button class="collection-pill" onclick="filterProducts('stickers', this)">Bumper Stickers</button>
+  <button class="collection-pill" onclick="filterProducts('bestsellers', this)">Best Sellers</button>
+  <button class="collection-pill" onclick="filterProducts('new', this)">New Drops</button>
+</div>
+
+<!-- Products -->
+<section class="products-section" id="clothing">
+  <div class="section-header">
+    <h2 class="section-title">The <span class="gold">Collection</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Fresh drops. Bold prints. Zero regrets.</p>
+  </div>
+
+  <div class="product-grid" id="product-grid">
+    <!-- CLOTHING -->
+    <div class="product-card" data-cat="clothing bestsellers">
+      <div class="product-img">
+        <span class="tag">Best Seller</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L4.5 6.5V9H3v6h1.5v2.5L12 22l7.5-4.5V15H21V9h-1.5V6.5L12 2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Torta Pounder Tee – Black</div>
+        <div class="product-price">$29.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="clothing new">
+      <div class="product-img">
+        <span class="tag new">New</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L4.5 6.5V9H3v6h1.5v2.5L12 22l7.5-4.5V15H21V9h-1.5V6.5L12 2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">TP Logo Hoodie – Grey</div>
+        <div class="product-price">$54.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="clothing">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L4.5 6.5V9H3v6h1.5v2.5L12 22l7.5-4.5V15H21V9h-1.5V6.5L12 2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Torta Tank Top – White</div>
+        <div class="product-price">$24.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="clothing">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L4.5 6.5V9H3v6h1.5v2.5L12 22l7.5-4.5V15H21V9h-1.5V6.5L12 2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Pounder Tee – Red</div>
+        <div class="product-price">$29.95</div>
+      </div>
+    </div>
+
+    <!-- HATS -->
+    <div class="product-card" data-cat="hats bestsellers">
+      <div class="product-img">
+        <span class="tag">Best Seller</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 14h16M4 14c0-4.41 3.59-8 8-8s8 3.59 8 8M2 14h20v2H2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">TP Snapback – Black</div>
+        <div class="product-price">$34.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="hats new">
+      <div class="product-img">
+        <span class="tag new">New</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 14h16M4 14c0-4.41 3.59-8 8-8s8 3.59 8 8M2 14h20v2H2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Dad Hat – Cream / Brown</div>
+        <div class="product-price">$34.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="hats">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 14h16M4 14c0-4.41 3.59-8 8-8s8 3.59 8 8M2 14h20v2H2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Trucker Hat – Black / Gold</div>
+        <div class="product-price">$29.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="hats">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 14h16M4 14c0-4.41 3.59-8 8-8s8 3.59 8 8M2 14h20v2H2z"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Snapback – Red / White</div>
+        <div class="product-price">$34.95</div>
+      </div>
+    </div>
+
+    <!-- BUMPER STICKERS -->
+    <div class="product-card" data-cat="stickers bestsellers">
+      <div class="product-img">
+        <span class="tag">Best Seller</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="3"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">TP Logo Bumper Sticker</div>
+        <div class="product-price">$7.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="stickers new">
+      <div class="product-img">
+        <span class="tag new">New</span>
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="3"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">"Torta'd" Bumper Sticker</div>
+        <div class="product-price">$7.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="stickers">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="3"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Pounder Wave Sticker</div>
+        <div class="product-price">$6.95</div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="stickers">
+      <div class="product-img">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="3"/></svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">HQ Bumper Sticker Pack</div>
+        <div class="product-price">$14.95</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Row -->
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-num">12K+</div>
+    <div class="stat-label">Pieces Sold</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">48</div>
+    <div class="stat-label">States Shipped</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Unhinged</div>
+  </div>
+</div>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-logo-wrap">
+      <div class="placeholder-logo"><span>Torta</span>Pounder</div>
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">About <span class="gold">Us</span></h2>
+      <div class="divider"></div>
+      <p>
+        <strong>Torta Pounder HQ</strong> started as a joke between friends — and then people actually wanted the merch. Now we're a full-blown brand built on bold graphics, dumb humor, and gear that actually looks good.
+      </p>
+      <p>
+        Every shirt, hat, and bumper sticker is designed to turn heads and start conversations. We don't do boring. We don't do subtle. We do <strong>Torta Pounder</strong>.
+      </p>
+      <p>
+        Based out of Houston, TX — repping flavor everywhere we go.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-text"><span>Torta</span> Pounder</div>
+      <p>Bold gear for people who don't take themselves too seriously. Houston, TX.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">Clothing</a>
+      <a href="#">Hats</a>
+      <a href="#">Bumper Stickers</a>
+      <a href="#">Best Sellers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="#">About Us</a>
+      <a href="#">Shipping & Returns</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Torta Pounder HQ. All rights reserved.</p>
+    <p>tortapounderhq.com</p>
+  </div>
+</footer>
+
+<!-- Filter Script -->
+<script>
+  function filterProducts(category, btn) {
+    // Update pills
+    document.querySelectorAll('.collection-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Filter cards
+    document.querySelectorAll('.product-card').forEach(card => {
+      const cats = card.dataset.cat || '';
+      if (category === 'all' || cats.includes(category)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>
