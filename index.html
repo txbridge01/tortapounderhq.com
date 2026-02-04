@@ -218,10 +218,10 @@
   }
   /* Logo image centered in the hero circle */
   .hero-logo-wrap img {
-    width: 75%;
-    height: 75%;
-    object-fit: contain;
-  }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
   .hero h1 {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
@@ -544,9 +544,9 @@
   <nav class="nav-top">
     <!-- Logo -->
     <a href="#" class="logo">
-      <div class="logo-icon">TP</div>
-      <div class="logo-text"><span>Torta</span> Pounder</div>
-    </a>
+  <div class="logo-icon"><img src="logo.png" alt="TP" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></div>
+  <div class="logo-text"><span>Torta</span> Pounder</div>
+</a>
 
     <!-- Center Nav -->
     <ul class="nav-links">
